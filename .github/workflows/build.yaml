@@ -25,7 +25,6 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
           pip install PyQt5
 
       # Exécute les tests unitaires
@@ -61,7 +60,6 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
           pip install PyQt5 pyinstaller
 
       # Crée un exécutable unique avec PyInstaller
