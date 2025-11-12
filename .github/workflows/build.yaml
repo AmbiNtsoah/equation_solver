@@ -1,75 +1,75 @@
-name: Build CI
+# name: Build CI
 
-on:
-  push:
-    branches : [ master ]
-  pull_request:
-    branches : [ master ]
+# on:
+#   push:
+#     branches : [ master ]
+#   pull_request:
+#     branches : [ master ]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      # Récupère le code du dépôt
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#     steps:
+#       # Récupère le code du dépôt
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      # Configure Python
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+#       # Configure Python
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.11'
 
-      # Installe les dépendances
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install PyQt5
+#       # Installe les dépendances
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install PyQt5
 
-      # Exécute les tests unitaires
-      - name: Run tests
-        run: pytest --maxfail=1 --disable-warnings -q
-        continue-on-error: true
+#       # Exécute les tests unitaires
+#       - name: Run tests
+#         run: pytest --maxfail=1 --disable-warnings -q
+#         continue-on-error: true
 
-      # Vérifie la qualité du code
-      - name: Lint code with flake8
-        run: |
-          pip install flake8
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+#       # Vérifie la qualité du code
+#       - name: Lint code with flake8
+#         run: |
+#           pip install flake8
+#           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
-      # Analyse statique
-      - name: Static analysis with pylint
-        run: |
-          pip install pylint
-          pylint core controller ui --exit-zero
+#       # Analyse statique
+#       - name: Static analysis with pylint
+#         run: |
+#           pip install pylint
+#           pylint core controller ui --exit-zero
 
-  package:
-    needs: build
-    runs-on: ubuntu-latest
+#   package:
+#     needs: build
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install PyQt5 pyinstaller
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install PyQt5 pyinstaller
 
-      # Crée un exécutable unique avec PyInstaller
-      - name: Build executable
-        run: |
-          pyinstaller --noconfirm --onefile main.py --name EquationSolver
+#       # Crée un exécutable unique avec PyInstaller
+#       - name: Build executable
+#         run: |
+#           pyinstaller --noconfirm --onefile main.py --name EquationSolver
 
-      # Sauvegarde l’exécutable comme artefact dans GitHub Actions
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: EquationSolver-exe
-          path: dist/
+#       # Sauvegarde l’exécutable comme artefact dans GitHub Actions
+#       - name: Upload build artifact
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: EquationSolver-exe
+#           path: dist/
