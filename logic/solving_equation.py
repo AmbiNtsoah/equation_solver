@@ -6,7 +6,7 @@ class EquationSolver:
 
     """ Constructor """
     def __init__(self):
-        pass
+        pass # This is just for implementing the constructor
 
     """ Calcul logic """
     def solve(self, value_a: float, value_b: float, value_c: float) -> Union[str, Tuple[float, float, float]]:
