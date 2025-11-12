@@ -28,3 +28,4 @@ class EquationSolver:
             value_x1 = (-value_b + sqrt_delta) / (2 * value_a)
             value_x2 = (-value_b - sqrt_delta) / (2 * value_a)
             return (delta, value_x1, value_x2)
+
