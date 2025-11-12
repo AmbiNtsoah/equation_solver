@@ -25,7 +25,7 @@ L’application affiche :
 
 ---
 
-## Installation
+## 🏁 Installation
 
 - cloner le reposiory
 
